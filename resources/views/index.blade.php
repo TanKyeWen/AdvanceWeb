@@ -199,7 +199,7 @@
                 height: 400px; /* Adjust as needed */
             }
 
-            .add-new-task{
+            .add-new-task-btn{
                 position: absolute;
                 bottom: 10px;
                 right: 10px;
@@ -213,7 +213,7 @@
                 cursor: pointer;
             }
 
-            .add-new-task:hover{
+            .add-new-task-btn:hover{
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
@@ -308,7 +308,7 @@
         </div>
 
         <div class="bottom-right-container">
-            <div class="add-new-task">
+            <div class="add-new-task-btn">
                 Add New Task
             </div>
         </div>
