@@ -21,6 +21,7 @@
             }
 
             .top-nav-container{
+                margin: 15px;
                 background-color: #1a202c;
                 text-align: right;
                 color: #a0aec0;
@@ -48,6 +49,173 @@
                 border-radius: 15px;
                 margin-left: 15px;
                 margin-top: 25px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: auto;
+            }
+
+            .task-display-container .individual-task-container{
+                margin: 20px;
+                padding: 10px;
+                border-radius: 10px;
+                border-color: #6b7280;
+                border-width: 2px;
+                max-width: 450px;
+                background-color:rgb(46, 62, 90);
+                overflow: hidden;
+                font-family: monospace;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .task-display-container .individual-task-container .task-title{
+                font-size: 30px;
+                font-weight: 600;
+                margin: 5px;
+                color:rgb(207, 178, 214);
+            }
+
+            .task-display-container .individual-task-container .task-date{
+                font-size: 20px;
+                font-weight: 200;
+                margin: 2px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-display-container .individual-task-container .task-time{
+                font-size: 19px;
+                margin: 2px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-display-container .individual-task-container .task-location{
+                font-size: 17px;
+                margin: 2px;
+                color:rgb(210, 190, 214);
+            }
+            .task-display-container .individual-task-container .task-tag{
+                font-size: 17px;
+                margin: 2px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-display-container .individual-task-container:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .task-detail-container{
+                border-radius: 15px;
+                margin-left: 15px;
+                margin-top: 25px;
+            }
+
+            .task-detail-container .individual-task-detail{
+                margin-right: 10px;
+                padding: 10px;
+                font-family: monospace;
+            }
+
+            .task-detail-container .individual-task-detail .task-title{
+                font-size: 35px;
+                font-weight: 600;
+                margin: 5px;
+                color:rgb(207, 178, 214);
+            }
+
+            .task-detail-container .individual-task-detail .task-date{
+                font-size: 20px;
+                font-weight: 200;
+                margin: 5px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-detail-container .individual-task-detail .task-time{
+                font-size: 20px;
+                font-weight: 200;
+                margin: 5px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-detail-container .individual-task-detail .task-location{
+                font-size: 20px;
+                font-weight: 200;
+                margin: 5px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-detail-container .individual-task-detail .task-tag{
+                font-size: 20px;
+                font-weight: 200;
+                margin: 5px;
+                color:rgb(210, 190, 214);
+            }
+
+            .task-detail-container .individual-task-detail .task-operation-container{
+                margin: 5px;
+                margin-top: 50px;
+                display: flex;
+                justify-content: flex-end;
+                font-family: monospace;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .task-detail-container .individual-task-detail .task-operation-container .task-delete{
+                border-radius: 10px;
+                background-color:rgb(188, 53, 53);
+                border-color:rgb(255, 96, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+            }
+
+            .task-detail-container .individual-task-detail .task-operation-container .task-delete:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .task-detail-container .individual-task-detail .task-operation-container .task-edit{
+                border-radius: 10px;
+                background-color:rgb(53, 188, 62);
+                border-color:rgb(109, 255, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+            }
+
+            .task-detail-container .individual-task-detail .task-operation-container .task-edit:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .bottom-right-container{
+                position: relative;
+                width: 100%;
+                height: 400px; /* Adjust as needed */
+            }
+
+            .add-new-task{
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                padding: 10px 20px;
+                margin-right: 20px;
+                margin-bottom: 20px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .add-new-task:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         </style>
 
@@ -63,6 +231,11 @@
                 // logoutUser(); // Call your logout function
             });
 
+            const addNewTask = document.querySelector('.add-new-task');
+
+            addNewTask.addEventListener('click', function() {
+
+            });
 
         </script>
     </head>
@@ -88,11 +261,55 @@
         
         <div class="task-body-container">
             <div class="task-display-container">
-                <p>test</p>
+                <div class="individual-task-container">
+                    <div class="task-title">Family Dinner</div>
+                    <div class="task-date">15 March 2024</div>
+                    <div class="task-time">14:00</div>
+                    <div class="task-location">Royal park, KL</div>
+                    <div class="task-tag">Family</div>
+                </div>
+                <div class="individual-task-container">
+                    <div class="task-title">Dinner</div>
+                    <div class="task-date">Task Date</div>
+                    <div class="task-time">Task Time</div>
+                    <div class="task-location">Task Location</div>
+                    <div class="task-tag">Task Tag</div>
+                </div>
+                <div class="individual-task-container">
+                    <div class="task-title">Task Title</div>
+                    <div class="task-date">Task Date</div>
+                    <div class="task-time">15:00 - 16:00</div>
+                    <div class="task-location">Task Location</div>
+                    <div class="task-tag">Task Tag</div>
+                </div>
+                <div class="individual-task-container">
+                    <div class="task-title">Task Title</div>
+                    <div class="task-date">Task Date</div>
+                    <div class="task-time">Task Time</div>
+                    <div class="task-location">Selangor</div>
+                    <div class="task-tag">Family</div>
+                </div>
             </div>
 
-            <div class="task-nav-container">
-                <div class=""></div>
+            <div class="task-detail-container">
+                <div class="individual-task-detail">
+                    <div class="task-title">Task Title</div>
+                    <div class="task-date">Task Date</div>
+                    <div class="task-time">Task Time</div>
+                    <div class="task-location">Task Location</div>
+                    <div class="task-tag">Task Tag</div>
+
+                    <div class="task-operation-container">
+                        <div class="task-delete">Delete</div>
+                        <div class="task-edit">Edit</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-right-container">
+            <div class="add-new-task">
+                Add New Task
             </div>
         </div>
     </body>
