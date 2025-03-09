@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::view('/signin', 'login');
+
+Route::view('/signup', 'register');
+
+Route::view('/user/{id}', 'profile');
+
+Route::view('/addTask', 'addTask');
+
+Route::view('/editTask', 'editTask');

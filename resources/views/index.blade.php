@@ -220,17 +220,6 @@
         </style>
 
         <script>
-            // !!TODO: For logout
-            // Get the element by its class name
-            const logoutButton = document.querySelector('.logout');
-
-            // Add a click event listener
-            logoutButton.addEventListener('click', function() {
-                // Your logic here, for example:
-                console.log('Logout button clicked');
-                // logoutUser(); // Call your logout function
-            });
-
             const addNewTask = document.querySelector('.add-new-task');
 
             addNewTask.addEventListener('click', function() {

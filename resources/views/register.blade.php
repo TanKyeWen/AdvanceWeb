@@ -34,7 +34,7 @@
                 z-index: -1; /* Ensure the image is behind other content */
             }
 
-            .login-body-container {
+            .register-body-container {
                 position: relative;
                 z-index: 1; /* Ensure the container is above the background image */
                 background-color: rgb(212, 203, 211); /* Optional: Add a semi-transparent background for readability */
@@ -60,7 +60,7 @@
                 color:rgb(60, 69, 84);
                 font-size: 20px;
             }
-            .login-btn{
+            .register-btn{
                 margin: 25px;
                 border-radius: 20px;
                 background: linear-gradient(to right, #FFF2F2, #A9B5DF, #7886C7, #2D336B);
@@ -68,7 +68,7 @@
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
-            .login-btn:hover{
+            .register-btn:hover{
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
@@ -92,10 +92,14 @@
     </head>
 
     <body class="body-container">
-        <div class="login-body-container">
-            <h1>Login Page</h1>
+        <div class="register-body-container">
+            <h1>Register Page</h1>
             <form action="" method="post">
                 @csrf
+                <div class="individual-field-container">
+                    <img src="{{ asset('images/profile.png') }}" class="profile-icon" style="height: 30px; width: 25px; margin-right: 15px;">
+                    <input type="username" name="username-field" id="username-field" placeholder="Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Username')"> <br>
+                </div>
                 <div class="individual-field-container">
                     <img src="{{ asset('images/email.png') }}" class="email-icon" style="height: 25px; width: 35px; margin-right: 5px;">
                     <input type="email" name="email-field" id="email-field" placeholder="Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Email')"> <br>
@@ -105,11 +109,15 @@
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
                     <input type="password" name="password-field" id="password-field" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
                 </div>
-                <input type="submit" value="Login" class="login-btn">
+                <div class="individual-field-container">
+                    <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
+                    <input type="password" name="re-password-field" id="re-password-field" placeholder="Retype Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your Password')">
+                </div>
+                <input type="submit" value="Register" class="register-btn">
             </form>
 
-            <div class="redirect-register">
-                Do Not Have An Account? <a href="/signup">Click Here!</a>
+            <div class="redirect-login">
+                Already Have An Account? <a href="/signin">Click Here!</a>
             </div>
         </div>
         <img src="{{ asset('images/wallpaper.jpg') }}" alt="Wallpaper" class="background-wallpaper">
