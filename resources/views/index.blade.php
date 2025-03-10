@@ -39,6 +39,37 @@
                 text-decoration: underline;
             }
 
+            .profile-button {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color:rgb(61, 74, 101);
+                min-width: 200px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                right: 0; 
+            }
+
+            .dropdown-content a {
+                color:rgb(182, 200, 223);
+                font-size: 25px;
+                padding: 12px 16px;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color:rgb(55, 69, 95);
+            }
+
+            .profile-button:hover .dropdown-content {
+                display: block;
+                text-decoration: none;
+            }
+
             .task-body-container{
                 display: grid;
                 grid-template-columns: 80% 20%;
@@ -49,6 +80,7 @@
                 border-radius: 15px;
                 margin-left: 15px;
                 margin-top: 25px;
+                padding-top: 35px;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 grid-template-rows: auto;
@@ -169,6 +201,8 @@
                 font-size: 15px;
                 min-width: 80px;
                 text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
             }
 
             .task-detail-container .individual-task-detail .task-operation-container .task-delete:hover{
@@ -186,6 +220,8 @@
                 font-size: 15px;
                 min-width: 80px;
                 text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
             }
 
             .task-detail-container .individual-task-detail .task-operation-container .task-edit:hover{
@@ -226,6 +262,16 @@
 
             });
 
+            // !!TODO: For logout
+            // Get the element by its class name
+            const logoutButton = document.querySelector('.logout-btn');
+
+            // Add a click event listener
+            logoutButton.addEventListener('click', function() {
+                // Your logic here, for example:
+                console.log('Logout button clicked');
+                // logoutUser(); // Call your logout function
+            });
         </script>
     </head>
     <body class="body-container">
@@ -243,9 +289,20 @@
             </div>
         @endif -->
         <div class="top-nav-container">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search...">
+            </div>
             <div class="home-btn"><a href="/index">Home</a></div>
             <div class="aboutus-btn"><a href="/aboutus">About Us</a></div>
-            <div class="profile-button"><a href="/profile">Profile</a></div>
+            <div class="profile-button">
+                Profile
+                <div class="dropdown-content">
+                    <a href="/updateUsername">Update Username</a>
+                    <a href="/updateEmail">Update Email</a>
+                    <a href="/updatePassword">Update Password</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
         </div>
         
         <div class="task-body-container">
@@ -255,27 +312,6 @@
                     <div class="task-date">15 March 2024</div>
                     <div class="task-time">14:00</div>
                     <div class="task-location">Royal park, KL</div>
-                    <div class="task-tag">Family</div>
-                </div>
-                <div class="individual-task-container">
-                    <div class="task-title">Dinner</div>
-                    <div class="task-date">Task Date</div>
-                    <div class="task-time">Task Time</div>
-                    <div class="task-location">Task Location</div>
-                    <div class="task-tag">Task Tag</div>
-                </div>
-                <div class="individual-task-container">
-                    <div class="task-title">Task Title</div>
-                    <div class="task-date">Task Date</div>
-                    <div class="task-time">15:00 - 16:00</div>
-                    <div class="task-location">Task Location</div>
-                    <div class="task-tag">Task Tag</div>
-                </div>
-                <div class="individual-task-container">
-                    <div class="task-title">Task Title</div>
-                    <div class="task-date">Task Date</div>
-                    <div class="task-time">Task Time</div>
-                    <div class="task-location">Selangor</div>
                     <div class="task-tag">Family</div>
                 </div>
             </div>

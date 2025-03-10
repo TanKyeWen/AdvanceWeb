@@ -20,8 +20,7 @@ class CreateUserAndTasksTables extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('uid')->unique();
+            $table->id() -> unique();
             $table->string('username');
             $table->string('password');
             $table->charset = 'utf8';
@@ -29,12 +28,11 @@ class CreateUserAndTasksTables extends Migration
         });
 
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->string('uid');
+            $table->id() -> unique();
             $table->string('title');
             $table->date('task_date');
             $table->time('task_time');
-            $table->string('location');
+            $table->string('task_location');
             $table->string('task_tag');
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';

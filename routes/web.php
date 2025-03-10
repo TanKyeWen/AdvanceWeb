@@ -21,7 +21,11 @@ Route::view('/signin', 'login');
 
 Route::view('/signup', 'register');
 
-Route::view('/user/{id}', 'profile');
+Route::view('/updateEmail', 'updateEmail');
+
+Route::view('/updateUsername', 'updateUsername');
+
+Route::view('/updatePassword', 'updatePassword');
 
 Route::view('/addTask', 'addTask');
 

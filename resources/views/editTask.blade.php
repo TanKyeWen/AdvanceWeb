@@ -21,20 +21,10 @@
                 height: 100%;
                 overflow: hidden;
                 font-family: sans-serif;
+                background-color: #1a202c;
             }
 
-            .background-wallpaper {
-                filter: blur(9px);
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                z-index: -1; /* Ensure the image is behind other content */
-            }
-
-            .login-body-container {
+            .add-body-container {
                 position: relative;
                 z-index: 1; /* Ensure the container is above the background image */
                 background-color: rgb(212, 203, 211); /* Optional: Add a semi-transparent background for readability */
@@ -55,26 +45,64 @@
                 margin-top: 25px;
             }
             input{
-                min-width: 300px;
+                min-width: 350px;
                 background-color: rgb(212, 203, 211);
                 color:rgb(60, 69, 84);
                 font-size: 20px;
             }
-            .login-btn{
-                margin: 25px;
-                border-radius: 20px;
-                background: linear-gradient(to right, #FFF2F2, #A9B5DF, #7886C7, #2D336B);
-                color: #1a202c;
+
+            select{
+                min-width: 350px;
+                background-color: rgb(212, 203, 211);
+                color:rgb(60, 69, 84);
+                font-size: 20px;
+            }
+
+            .operations-btn{
+                margin: 5px;
+                margin-top: 50px;
+                display: flex;
+                justify-content: space-around;
+                font-family: monospace;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
-            .login-btn:hover{
+            .back-btn{
+                border-radius: 10px;
+                background-color:rgb(188, 53, 53);
+                border-color:rgb(255, 96, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
+            }
+
+            .back-btn:hover{
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
 
-            a{
-                color:rgb(48, 69, 255);
+            .add-btn{
+                border-radius: 10px;
+                background-color:rgb(53, 188, 62);
+                border-color:rgb(109, 255, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
+            }
+
+            .add-btn:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         </style>
 
@@ -88,31 +116,44 @@
                     element.placeholder = placeholderText;
                 }
             }
+
+            function goBack(){
+                window.history.back();
+            }
         </script>
     </head>
 
     <body class="body-container">
-        <div class="login-body-container">
-            <h1>Login Page</h1>
-        <!-- TODO: Need to Create Session and validate if the credentials is correct -->
+        <div class="add-body-container">
+            <h1>Edit Task Page</h1>
+        <!-- TODO: Need to make the Placeholder same as the editing Task -->
             <form action="" method="post">
                 @csrf
+                <input type="hidden" name="task-id" id="task-id">
                 <div class="individual-field-container">
-                    <img src="{{ asset('images/email.png') }}" class="email-icon" style="height: 25px; width: 35px; margin-right: 5px;">
-                    <input type="email" name="email-field" id="email-field" placeholder="Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Email')"> <br>
+                    <input type="text" name="task-title-field" id="task-title-field" placeholder="Enter New Task Title" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Task Title')"> <br>
                 </div>
-
                 <div class="individual-field-container">
-                    <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
+                    <input type="date" name="task-date-field" id="task-date-field" placeholder="Enter Task Date" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Date')"> <br>
                 </div>
-                <input type="submit" value="Login" class="login-btn">
+                <div class="individual-field-container">
+                    <input type="time" name="task-time-field" id="task-time-field" placeholder="Enter Task Time" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Time')"> <br>
+                </div>
+                <div class="individual-field-container">
+                    <input type="text" name="task-location-field" id="task-location-field" placeholder="Enter Task Location" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Location')"> <br>
+                </div>
+                <div class="individual-field-container">
+                    <select name="task-tag-field" id="task-tag-field">
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="Family">Family</option>
+                    </select>
+                </div>
+                <div class="operations-btn">
+                    <input type="button" value="Go Back" class="back-btn" onclick="goBack()">
+                    <input type="submit" value="Add Task" class="add-btn">
+                </div>
             </form>
-
-            <div class="redirect-register">
-                Do Not Have An Account? <a href="/signup">Click Here!</a>
-            </div>
         </div>
-        <img src="{{ asset('images/wallpaper.jpg') }}" alt="Wallpaper" class="background-wallpaper">
     </body>
 </html>

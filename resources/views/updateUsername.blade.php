@@ -34,7 +34,7 @@
                 z-index: -1; /* Ensure the image is behind other content */
             }
 
-            .login-body-container {
+            .update-body-container {
                 position: relative;
                 z-index: 1; /* Ensure the container is above the background image */
                 background-color: rgb(212, 203, 211); /* Optional: Add a semi-transparent background for readability */
@@ -60,21 +60,52 @@
                 color:rgb(60, 69, 84);
                 font-size: 20px;
             }
-            .login-btn{
-                margin: 25px;
-                border-radius: 20px;
-                background: linear-gradient(to right, #FFF2F2, #A9B5DF, #7886C7, #2D336B);
-                color: #1a202c;
+
+            .operations-btn{
+                margin: 5px;
+                margin-top: 50px;
+                display: flex;
+                justify-content: space-around;
+                font-family: monospace;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
-            .login-btn:hover{
+            .back-btn{
+                border-radius: 10px;
+                background-color:rgb(188, 53, 53);
+                border-color:rgb(255, 96, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
+            }
+
+            .back-btn:hover{
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
 
-            a{
-                color:rgb(48, 69, 255);
+            .update-btn{
+                border-radius: 10px;
+                background-color:rgb(53, 188, 62);
+                border-color:rgb(109, 255, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
+            }
+
+            .update-btn:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         </style>
 
@@ -88,30 +119,32 @@
                     element.placeholder = placeholderText;
                 }
             }
+
+            function goBack(){
+                window.history.back();
+            }
         </script>
     </head>
 
     <body class="body-container">
-        <div class="login-body-container">
-            <h1>Login Page</h1>
-        <!-- TODO: Need to Create Session and validate if the credentials is correct -->
+        <div class="update-body-container">
+            <h1>Update Username Page</h1>
             <form action="" method="post">
                 @csrf
                 <div class="individual-field-container">
-                    <img src="{{ asset('images/email.png') }}" class="email-icon" style="height: 25px; width: 35px; margin-right: 5px;">
-                    <input type="email" name="email-field" id="email-field" placeholder="Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Email')"> <br>
+                    <img src="{{ asset('images/profile.png') }}" class="username-icon" style="height: 30px; width: 25px; margin-right: 15px;">
+                    <input type="text" name="username-field" id="username-field" placeholder="Enter New Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Username')"> <br>
                 </div>
 
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
+                    <input type="password" name="password-field" id="password-field" placeholder="Enter Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your Password')">
                 </div>
-                <input type="submit" value="Login" class="login-btn">
+                <div class="operations-btn">
+                    <input type="button" value="Cancel Update" class="back-btn" onclick="goBack()">
+                    <input type="submit" value="Confirm Update" class="update-btn">
+                </div>
             </form>
-
-            <div class="redirect-register">
-                Do Not Have An Account? <a href="/signup">Click Here!</a>
-            </div>
         </div>
         <img src="{{ asset('images/wallpaper.jpg') }}" alt="Wallpaper" class="background-wallpaper">
     </body>
