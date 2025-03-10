@@ -309,7 +309,6 @@
         @endif -->
         <div class="top-nav-container">
             <div class="home-btn"><a href="/index">Home</a></div>
-            <div class="aboutus-btn"><a href="/aboutus">About Us</a></div>
             <div class="profile-button">
                 Profile
                 <div class="dropdown-content">
