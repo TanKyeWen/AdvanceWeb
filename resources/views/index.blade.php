@@ -84,6 +84,25 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 grid-template-rows: auto;
+                position: relative;
+            }
+
+            .search-container{
+                z-index: 100;
+                position: absolute;
+                padding: 30px;
+                padding-left: 40px;
+                padding-top: 40px;
+            }
+
+            .search-container input{
+                min-width: 300px;
+                background-color: #2d3748;
+                color:rgb(182, 200, 223);
+                font-size: 20px;
+                border-bottom-width: 2px;
+                border-color:rgb(182, 200, 223);
+                min-width: 900px;
             }
 
             .task-display-container .individual-task-container{
@@ -235,7 +254,7 @@
                 height: 400px; /* Adjust as needed */
             }
 
-            .add-new-task-btn{
+            .add-new-task{
                 position: absolute;
                 bottom: 10px;
                 right: 10px;
@@ -249,17 +268,17 @@
                 cursor: pointer;
             }
 
-            .add-new-task-btn:hover{
+            .add-new-task:hover{
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         </style>
 
         <script>
-            const addNewTask = document.querySelector('.add-new-task');
-
-            addNewTask.addEventListener('click', function() {
-
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('add-new-task-btn').addEventListener('click', function() {
+                    window.location.href = '/addTask';
+                });
             });
 
             // !!TODO: For logout
@@ -289,9 +308,6 @@
             </div>
         @endif -->
         <div class="top-nav-container">
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search...">
-            </div>
             <div class="home-btn"><a href="/index">Home</a></div>
             <div class="aboutus-btn"><a href="/aboutus">About Us</a></div>
             <div class="profile-button">
@@ -300,12 +316,15 @@
                     <a href="/updateUsername">Update Username</a>
                     <a href="/updateEmail">Update Email</a>
                     <a href="/updatePassword">Update Password</a>
-                    <a href="/logout">Logout</a>
+                    <div class="logout-btn"><a>Logout</a></div>
                 </div>
             </div>
         </div>
         
         <div class="task-body-container">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search...">
+            </div>
             <div class="task-display-container">
                 <div class="individual-task-container">
                     <div class="task-title">Family Dinner</div>
@@ -333,7 +352,7 @@
         </div>
 
         <div class="bottom-right-container">
-            <div class="add-new-task-btn">
+            <div class="add-new-task" id="add-new-task-btn">
                 Add New Task
             </div>
         </div>

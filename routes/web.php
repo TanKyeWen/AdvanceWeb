@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,6 @@ Route::view('/updateUsername', 'updateUsername');
 Route::view('/updatePassword', 'updatePassword');
 
 Route::view('/addTask', 'addTask');
+Route::get('/addTask', [TaskController::class, 'addNewTaskRedirect'])->name('addTask');
 
 Route::view('/editTask', 'editTask');
