@@ -308,7 +308,7 @@
             </div>
         @endif -->
         <div class="top-nav-container">
-            <div class="home-btn"><a href="/index">Home</a></div>
+            <div class="home-btn"><a href="/">Home</a></div>
             <div class="profile-button">
                 Profile
                 <div class="dropdown-content">
