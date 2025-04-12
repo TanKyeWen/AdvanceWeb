@@ -21,21 +21,20 @@ class CreateUserAndTasksTables extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Auto-incrementing primary key
-            $table->uuid('uuid')->unique(); // UUID for external reference
-            $table->string('username');
-            $table->string('password');
+            $table->string('username')->unique(); // Ensure usernames are unique
+            $table->string('email')->unique(); // Ensure email are unique
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
         });
 
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
             $table->string('title');
             $table->date('task_date');
             $table->time('task_time');
             $table->string('task_location');
             $table->string('task_tag');
+            $table->string('username'); // username field for foreign key
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
         });
