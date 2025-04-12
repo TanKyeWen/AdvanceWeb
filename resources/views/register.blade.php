@@ -94,25 +94,36 @@
     <body class="body-container">
         <div class="register-body-container">
             <h1>Register Page</h1>
-            <form action="" method="post">
+            <form action="/signup" method="post">
                 @csrf
                 <div class="individual-field-container">
                     <img src="{{ asset('images/profile.png') }}" class="profile-icon" style="height: 30px; width: 25px; margin-right: 15px;">
-                    <input type="username" name="username-field" id="username-field" placeholder="Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Username')"> <br>
+                    <input type="text" name="username" id="username" placeholder="Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Username')" value="{{ old('username-field') }}"> 
                 </div>
+                @error('username')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/email.png') }}" class="email-icon" style="height: 25px; width: 35px; margin-right: 5px;">
-                    <input type="email" name="email-field" id="email-field" placeholder="Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Email')"> <br>
+                    <input type="email" name="email" id="email" placeholder="Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Email')" value="{{ old('email-field') }}">
                 </div>
-
+                @error('email')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
+                    <input type="password" name="password" id="password" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
                 </div>
+                @error('password')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="re-password-field" id="re-password-field" placeholder="Retype Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your Password')">
+                    <input type="password" name="re-password" id="re-password" placeholder="Retype Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your Password')">
                 </div>
+                @error('re-password')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <input type="submit" value="Register" class="register-btn">
             </form>
 

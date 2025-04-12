@@ -126,20 +126,32 @@
     <body class="body-container">
         <div class="add-body-container">
             <h1>Add Task Page</h1>
-            <form action="" method="post">
+            <form action="/addTask" method="post">
                 @csrf
                 <div class="individual-field-container">
                     <input type="text" name="task-title-field" id="task-title-field" placeholder="Enter New Task Title" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Task Title')"> <br>
                 </div>
+                @error('task-title-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <input type="date" name="task-date-field" id="task-date-field" placeholder="Enter Task Date" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Date')"> <br>
                 </div>
+                @error('task-date-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <input type="time" name="task-time-field" id="task-time-field" placeholder="Enter Task Time" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Time')"> <br>
                 </div>
+                @error('task-time-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <input type="text" name="task-location-field" id="task-location-field" placeholder="Enter Task Location" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Location')"> <br>
                 </div>
+                @error('task-location-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <select name="task-tag-field" id="task-tag-field">
                         <option value="Personal">Personal</option>

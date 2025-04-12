@@ -129,17 +129,22 @@
     <body class="body-container">
         <div class="update-body-container">
             <h1>Update Username Page</h1>
-            <form action="" method="post">
+            <form action="/updateUsername" method="post">
                 @csrf
                 <div class="individual-field-container">
                     <img src="{{ asset('images/profile.png') }}" class="username-icon" style="height: 30px; width: 25px; margin-right: 15px;">
-                    <input type="text" name="username-field" id="username-field" placeholder="Enter New Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Username')"> <br>
+                    <input type="text" name="username" id="username" placeholder="Enter New Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Username')"> <br>
                 </div>
-
+                @error('username')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Enter Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your Password')">
+                    <input type="password" name="password" id="password" placeholder="Enter Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your Password')">
                 </div>
+                @error('password')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="operations-btn">
                     <input type="button" value="Cancel Update" class="back-btn" onclick="goBack()">
                     <input type="submit" value="Confirm Update" class="update-btn">

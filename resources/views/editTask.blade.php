@@ -127,33 +127,66 @@
         <div class="add-body-container">
             <h1>Edit Task Page</h1>
         <!-- TODO: Need to make the Placeholder same as the editing Task -->
-            <form action="" method="post">
+            <<form action="{{ route('editTask') }}" method="post">
                 @csrf
-                <input type="hidden" name="task-id" id="task-id">
+                <input type="hidden" name="task-id" id="task-id" value="{{ $task->id }}">
+                
                 <div class="individual-field-container">
-                    <input type="text" name="task-title-field" id="task-title-field" placeholder="Enter New Task Title" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Task Title')"> <br>
+                    <input type="text" name="task-title-field" id="task-title-field"
+                        value="{{ $task->task_title }}"
+                        placeholder="Enter New Task Title"
+                        onfocus="removePlaceholder(this)"
+                        onblur="restorePlaceholder(this, 'Enter New Task Title')">
                 </div>
+                @error('username')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
-                    <input type="date" name="task-date-field" id="task-date-field" placeholder="Enter Task Date" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Date')"> <br>
+                    <input type="date" name="task-date-field" id="task-date-field"
+                        value="{{ $task->task_date }}"
+                        placeholder="Enter Task Date"
+                        onfocus="removePlaceholder(this)"
+                        onblur="restorePlaceholder(this, 'Enter Task Date')">
                 </div>
+                @error('task-date-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
-                    <input type="time" name="task-time-field" id="task-time-field" placeholder="Enter Task Time" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Time')"> <br>
+                    <input type="time" name="task-time-field" id="task-time-field"
+                        value="{{ $task->task_time }}"
+                        placeholder="Enter Task Time"
+                        onfocus="removePlaceholder(this)"
+                        onblur="restorePlaceholder(this, 'Enter Task Time')">
                 </div>
+                @error('task-time-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
-                    <input type="text" name="task-location-field" id="task-location-field" placeholder="Enter Task Location" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Task Location')"> <br>
+                    <input type="text" name="task-location-field" id="task-location-field"
+                        value="{{ $task->task_location }}"
+                        placeholder="Enter Task Location"
+                        onfocus="removePlaceholder(this)"
+                        onblur="restorePlaceholder(this, 'Enter Task Location')">
                 </div>
+                @error('task-location-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <select name="task-tag-field" id="task-tag-field">
-                        <option value="Personal">Personal</option>
-                        <option value="Work">Work</option>
-                        <option value="Family">Family</option>
+                        <option value="Personal" {{ $task->task_tag == 'Personal' ? 'selected' : '' }}>Personal</option>
+                        <option value="Work" {{ $task->task_tag == 'Work' ? 'selected' : '' }}>Work</option>
+                        <option value="Family" {{ $task->task_tag == 'Family' ? 'selected' : '' }}>Family</option>
                     </select>
                 </div>
+                @error('task-tag-field')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="operations-btn">
                     <input type="button" value="Go Back" class="back-btn" onclick="goBack()">
-                    <input type="submit" value="Add Task" class="add-btn">
+                    <input type="submit" value="Confirm Edit" class="add-btn">
                 </div>
             </form>
+
         </div>
     </body>
 </html>

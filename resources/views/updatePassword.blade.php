@@ -129,23 +129,29 @@
     <body class="body-container">
         <div class="update-body-container">
             <h1>Update password Page</h1>
-            <form action="" method="post">
+            <form action="/updatePassword" method="post">
                 @csrf
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Enter Your CURRENT Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your CURRENT Password')">
+                    <input type="password" name="password" id="password" placeholder="Enter Your CURRENT Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your CURRENT Password')">
                 </div>
-
+                @error('password')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Enter Your NEW Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your NEW CURRENT Password')">
+                    <input type="password" name="password_new" id="password_new" placeholder="Enter Your NEW Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your NEW CURRENT Password')">
                 </div>
-
+                @error('password_new')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Retype Your NEW Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your NEW Password')">
+                    <input type="password" name="re_password_new" id="re_password_new" placeholder="Retype Your NEW Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your NEW Password')">
                 </div>
-
+                @error('re_password_new')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="operations-btn">
                     <input type="button" value="Cancel Update" class="back-btn" onclick="goBack()">
                     <input type="submit" value="Confirm Update" class="update-btn">

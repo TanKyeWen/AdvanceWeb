@@ -294,6 +294,11 @@
         </script>
     </head>
     <body class="body-container">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- @if (Route::has('login'))
             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
@@ -324,30 +329,26 @@
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search...">
             </div>
-            <div class="task-display-container">
+            @foreach ($tasks as $task)
                 <div class="individual-task-container">
-                    <div class="task-title">Family Dinner</div>
-                    <div class="task-date">15 March 2024</div>
-                    <div class="task-time">14:00</div>
-                    <div class="task-location">Royal park, KL</div>
-                    <div class="task-tag">Family</div>
-                </div>
-            </div>
+                    <div class="task-title">{{ $task->title }}</div>
+                    <div class="task-date">{{ \Carbon\Carbon::parse($task->task_date)->format('d F Y') }}</div>
+                    <div class="task-time">{{ \Carbon\Carbon::parse($task->task_time)->format('H:i') }}</div>
+                    <div class="task-location">{{ $task->task_location }}</div>
+                    <div class="task-tag">{{ $task->task_tag }}</div>
 
-            <div class="task-detail-container">
-                <div class="individual-task-detail">
-                    <div class="task-title">Task Title</div>
-                    <div class="task-date">Task Date</div>
-                    <div class="task-time">Task Time</div>
-                    <div class="task-location">Task Location</div>
-                    <div class="task-tag">Task Tag</div>
-
-                    <div class="task-operation-container">
-                        <div class="task-delete">Delete</div>
-                        <div class="task-edit">Edit</div>
+                    <div class="task-buttons">
+                        <form action="/editTask/{{ $task->id }}" method="get" style="display: inline;">
+                            <button type="submit" class="edit-btn">Edit</button>
+                        </form>
+                        <form action="/deleteTask/{{ $task->id }}" method="post" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                        </form>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
         <div class="bottom-right-container">

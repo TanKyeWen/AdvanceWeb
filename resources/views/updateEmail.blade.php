@@ -129,17 +129,22 @@
     <body class="body-container">
         <div class="update-body-container">
             <h1>Update Email Page</h1>
-            <form action="" method="post">
+            <form action="/updateEmail" method="post">
                 @csrf
                 <div class="individual-field-container">
                     <img src="{{ asset('images/email.png') }}" class="email-icon" style="height: 25px; width: 35px; margin-right: 5px;">
-                    <input type="email" name="email-field" id="email-field" placeholder="Enter New Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Email')"> <br>
+                    <input type="email" name="email" id="email" placeholder="Enter New Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter New Email')"> <br>
                 </div>
-
+                @error('email')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Enter Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your Password')">
+                    <input type="password" name="password" id="password" placeholder="Enter Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Enter Your Password')">
                 </div>
+                @error('password')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <div class="operations-btn">
                     <input type="button" value="Cancel Update" class="back-btn" onclick="goBack()">
                     <input type="submit" value="Confirm Update" class="update-btn">
