@@ -33,8 +33,16 @@ class CreateUserAndTasksTables extends Migration
             $table->date('task_date');
             $table->time('task_time');
             $table->string('task_location');
-            $table->string('task_tag');
+            $table->string('tag_id'); // tag_id field for foreign key
             $table->string('username'); // username field for foreign key
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+        });
+
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
+            $table->string('tag_name');
+            $table->date('tag_id')->unique();
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
         });
