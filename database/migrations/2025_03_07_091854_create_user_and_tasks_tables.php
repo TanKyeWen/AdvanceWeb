@@ -39,7 +39,7 @@ class CreateUserAndTasksTables extends Migration
             $table->collation = 'utf8_unicode_ci';
         });
 
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('tag_name');
             $table->date('tag_id')->unique();
