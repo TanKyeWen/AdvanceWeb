@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +24,24 @@ Route::get('/', function () {
 });
 Route::get('/index/{username}', [UserController::class, 'showIndex'])->name('index');
 
+//Admin
+Auth::routes();
+Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
+Route::get('/register/admin', [RegisterController::class,'showAdminRegisterForm']);
+Route::post('/login/admin', [LoginController::class,'adminLogin']);
+Route::post('/register/admin', [RegisterController::class,'createAdmin']);
+
+Route::group(['middleware' => 'auth:admin'], function () {
+
+    Route::view('/admin', 'admin');
+   });
+
 //Login
 Route::view('/signin', 'login');
+
+//Logout
+Route::get('logout', [LoginController::class,'logout']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Sign Up
 Route::view('/signup', 'register');
@@ -51,3 +71,18 @@ Route::view('/editTask', 'editTask');
 
 //Delete task
 Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//All Operations from PostController (somehow related to TaskController)
+Route::get('/posts/viewAll', [PostController::class, 'viewAll']);
+Route::get('/posts/view', [PostController::class, 'view']);
+Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/editAll', [PostController::class, 'editAll']);
+Route::get('/posts/edit', [PostController::class, 'edit']);
+Route::get('/posts/delete', [PostController::class, 'delete']);
+Route::get('/posts/update', [PostController::class, 'update']);
+Route::get('/posts/assign', [PostController::class, 'assign']);
+Route::get('/posts/markAsComplete', [PostController::class, 'markAsComplete']);
