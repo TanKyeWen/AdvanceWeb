@@ -86,3 +86,34 @@ Route::get('/posts/delete', [PostController::class, 'delete']);
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/assign', [PostController::class, 'assign']);
 Route::get('/posts/markAsComplete', [PostController::class, 'markAsComplete']);
+
+//Logged in and out state
+Route::get("login", function () {
+    if(session()->has('user')) {
+        return redirect("home");
+    }
+    return view('login');
+});
+
+Route::post("login",[UserController::class,'login']);
+
+Route::get("logout", function () {
+    if(session()->has('user')) {
+        session()->pull('user');
+    }
+        return redirect("login");
+});
+
+//Middleware route for check session
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('checksession');
+
+// Route to store session data
+Route::get('/storeSession', [UserController::class, 'storeSessionData'])->name('store.session');
+
+// Route to get session data
+Route::get('/getSession', [UserController::class, 'getSessionData'])->name('get.session');
+
+// Route to delete session data
+Route::get('/deleteSession', [UserController::class, 'deleteSessionData'])->name('delete.session');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 
 class UserController extends Controller
@@ -17,6 +18,9 @@ class UserController extends Controller
       'password' => 'required|min:6',
       're-password' => 'required|same:password',
     ]);
+
+    $request->session()->put('user', $data['username']);
+    $request->session()->put('email', $data['email']);
 
     // Save to database
     $user = new User();
@@ -108,4 +112,22 @@ class UserController extends Controller
         ]);
     }
 
+    public function storeSessionData(Request $request)
+    {
+        // Store session data
+        session(['key' => 'value']);
+    }
+
+    public function getSessionData()
+    {
+        // Retrieve session data
+        $value = session('key');
+        return $value;
+    }
+
+    public function deleteSessionData()
+    {
+        // Delete session data
+        session()->forget('key');
+    }
 }
