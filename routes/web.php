@@ -53,14 +53,14 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/editTask/{id}', [TaskController::class, 'showEditForm'])
         ->name('task.edit')
-        ->middleware('auth');
+        ->middleware(['auth', 'task.owner']);
         
     Route::post('/editTask', [TaskController::class, 'editTask'])
         ->name('editTask');
     
     Route::delete('/deleteTask/{id}', [TaskController::class, 'deleteTask'])
         ->name('delete.task')
-        ->middleware('auth');
+        ->middleware(['auth', 'task.owner']);
     
     // Logout route
     Route::post('/logout', function () {
