@@ -119,9 +119,9 @@
                 @enderror
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="re-password" id="re-password" placeholder="Retype Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your Password')">
+                    <input type="password" name="password-confirm" id="password-confirm" placeholder="Retype Your Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Retype Your Password')">
                 </div>
-                @error('re-password')
+                @error('password-confirm')
                     <div class="text-danger" style="color: red;">{{ $message }}</div>
                 @enderror
                 <input type="submit" value="Register" class="register-btn">

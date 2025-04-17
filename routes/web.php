@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 
@@ -16,7 +17,7 @@ use App\Http\Controllers\UserController;
 */
 //Home
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 });
 Route::get('/index/{username}', [UserController::class, 'showIndex'])->name('index');
 
@@ -51,3 +52,7 @@ Route::view('/editTask', 'editTask');
 
 //Delete task
 Route::get('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
