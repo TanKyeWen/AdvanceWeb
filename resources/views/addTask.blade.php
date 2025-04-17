@@ -153,10 +153,12 @@
                     <div class="text-danger" style="color: red;">{{ $message }}</div>
                 @enderror
                 <div class="individual-field-container">
-                    <select name="task-tag-field" id="task-tag-field">
-                        <option value="Personal">Personal</option>
-                        <option value="Work">Work</option>
-                        <option value="Family">Family</option>
+                    <select name="task-tag-field" id="task-tag-field" class="task-tag-field">
+                        @foreach($tags as $tag)
+                            <option value="{{ $tag->id }}" {{ old('task-tag-field') == $tag->id ? 'selected' : '' }}>
+                                {{ $tag->tag_name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="operations-btn">

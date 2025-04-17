@@ -15,7 +15,12 @@ class Task extends Model
         'task_date',
         'task_time',
         'task_location',
-        'task_tag',
+        'tag_id',
         'username'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'username', 'username');
+    }
 }

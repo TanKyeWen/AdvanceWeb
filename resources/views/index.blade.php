@@ -105,8 +105,9 @@
                 min-width: 900px;
             }
 
-            .task-display-container .individual-task-container{
+            .individual-task-container{
                 margin: 20px;
+                margin-top: 50px;
                 padding: 10px;
                 border-radius: 10px;
                 border-color: #6b7280;
@@ -118,38 +119,38 @@
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
 
-            .task-display-container .individual-task-container .task-title{
+            .individual-task-container .task-title{
                 font-size: 30px;
                 font-weight: 600;
                 margin: 5px;
                 color:rgb(207, 178, 214);
             }
 
-            .task-display-container .individual-task-container .task-date{
+            .individual-task-container .task-date{
                 font-size: 20px;
                 font-weight: 200;
                 margin: 2px;
                 color:rgb(210, 190, 214);
             }
 
-            .task-display-container .individual-task-container .task-time{
+            .individual-task-container .task-time{
                 font-size: 19px;
                 margin: 2px;
                 color:rgb(210, 190, 214);
             }
 
-            .task-display-container .individual-task-container .task-location{
+            .individual-task-container .task-location{
                 font-size: 17px;
                 margin: 2px;
                 color:rgb(210, 190, 214);
             }
-            .task-display-container .individual-task-container .task-tag{
+            .individual-task-container .task-tag{
                 font-size: 17px;
                 margin: 2px;
                 color:rgb(210, 190, 214);
             }
 
-            .task-display-container .individual-task-container:hover{
+            .individual-task-container:hover{
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
@@ -247,7 +248,47 @@
                 transform: translateY(5px);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
+            .task-buttons{
+                display: flex;
+                justify-content: space-between;
+            }
+            .delete-btn{
+                border-radius: 10px;
+                background-color:rgb(188, 53, 53);
+                border-color:rgb(255, 96, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
+            }
 
+            .delete-btn:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .edit-btn{
+                border-radius: 10px;
+                background-color:rgb(53, 188, 62);
+                border-color:rgb(109, 255, 96);
+                border-width: 2px;
+                padding: 5px 15px 5px 15px;
+                margin-right: 10px;
+                font-size: 15px;
+                min-width: 80px;
+                text-align: center;
+                color:rgb(245, 245, 245);
+                font-weight: 700;
+            }
+
+            .edit-btn:hover{
+                transform: translateY(5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
             .bottom-right-container{
                 position: relative;
                 width: 100%;
@@ -328,7 +369,7 @@
             </div>
         </div>
         
-        <div class="task-body-container">
+        <div class="task-display-container">
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search...">
             </div>
@@ -339,7 +380,6 @@
                     <div class="task-time">{{ \Carbon\Carbon::parse($task->task_time)->format('H:i') }}</div>
                     <div class="task-location">{{ $task->task_location }}</div>
                     <div class="task-tag">{{ $task->task_tag }}</div>
-
                     <div class="task-buttons">
                         <form action="{{ route('task.edit', ['id' => $task->id]) }}" method="get" style="display: inline;">
                             <button type="submit" class="edit-btn">Edit</button>
@@ -347,7 +387,7 @@
                         <form action="{{ route('delete.task', ['id' => $task->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="delete-btn">Delete</button>
                         </form>
                     </div>
                 </div>

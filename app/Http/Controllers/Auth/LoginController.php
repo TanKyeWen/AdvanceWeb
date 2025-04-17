@@ -39,5 +39,4 @@ class LoginController extends Controller
     {
         return redirect()->route('index', ['username' => $user->username]);
     }
-
 }

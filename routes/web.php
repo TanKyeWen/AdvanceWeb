@@ -17,52 +17,59 @@ use App\Http\Controllers\UserController;
 */
 //Home
 
-Route::get('/', function () {
-    return redirect()->route('index', ['username' => Auth::user()->username]);
+// Guest routes
+Route::view('/login', 'auth.login')->middleware('guest');
+Route::post('/login', [UserController::class, 'login'])
+    ->middleware(['guest', 'throttle:5,1'])  // Limited to 5 attempst per minute
+    ->name('login');
+Route::view('/signup', 'auth.register')->middleware('guest');
+Route::post('/signup', [UserController::class, 'signUp'])->name('signup')->middleware('guest');
+
+// Authenticated routes
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('index', ['username' => Auth::user()->username]);
+    });
+    
+    // Only allow users to view their own profile
+    Route::get('/index/{username}', [UserController::class, 'showIndex'])
+        ->name('index')
+        ->middleware('can:view-profile,username');
+    
+    // Update user routes
+    Route::post('/updateEmail', [UserController::class, 'updateEmail'])->name('updateEmail');
+    Route::view('/updateEmail', 'updateEmail');
+    Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
+    Route::view('/updatePassword', 'updatePassword');
+    
+    // Task routes with policy enforcement
+    Route::get('/addTask', [TaskController::class, 'addNewTaskRedirect'])
+        ->name('addTask')
+        ->middleware('can:create,App\Models\Task');
+        
+    Route::post('/addTask', [TaskController::class, 'addTask'])
+        ->name('task.addTask')
+        ->middleware('can:create,App\Models\Task');
+    
+    Route::get('/editTask/{id}', [TaskController::class, 'showEditForm'])
+        ->name('task.edit')
+        ->middleware('auth');
+        
+    Route::post('/editTask', [TaskController::class, 'editTask'])
+        ->name('editTask');
+    
+    Route::delete('/deleteTask/{id}', [TaskController::class, 'deleteTask'])
+        ->name('delete.task')
+        ->middleware('auth');
+    
+    // Logout route
+    Route::post('/logout', function () {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/login');
+    })->name('logout');
 });
-Route::get('/index/{username}', [UserController::class, 'showIndex'])->name('index');
 
-//Login
-Route::view('/login', 'auth.login');
-Route::post('/login', [UserController::class, 'login'])->name('login');;
-
-//Sign Up
-Route::view('/signup', 'auth.register');
-Route::post('/signup', [UserController::class, 'signUp'])->name('signup');
-
-// //Update username
-// Route::post('/updateUsername', [UserController::class, 'updateUsername'])->name('updateUsername');
-// Route::view('/updateUsername', 'updateUsername');
-
-//Update Email
-Route::post('/updateEmail', [UserController::class, 'updateEmail'])->name('updateEmail');
-Route::view('/updateEmail', 'updateEmail');
-
-//Update password
-Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
-Route::view('/updatePassword', 'updatePassword');
-
-//Add task
-Route::view('/addTask', 'addTask');
-Route::get('/addTask', [TaskController::class, 'addNewTaskRedirect'])->name('addTask');
-Route::post('/addTask', [TaskController::class, 'addTask'])->name('task.addTask');
-
-//Edit task
-Route::get('/editTask/{id}', [TaskController::class, 'showEditForm'])->name('task.edit');
-Route::post('/editTask', [TaskController::class, 'editTask'])->name('editTask');
-Route::view('/editTask', 'editTask');
-
-//Delete task
-Route::delete('/deleteTask/{id}', [TaskController::class, 'deleteTask'])->name('delete.task');
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect('/login'); // or any route you want after logout
-})->name('logout')->middleware('auth');
+Auth::routes(['register' => false]); // Disable default register route if you have your own
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
