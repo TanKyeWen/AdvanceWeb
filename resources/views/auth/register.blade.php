@@ -127,7 +127,7 @@
                 <input type="submit" value="Register" class="register-btn">
             </form>
             <div class="redirect-login">
-                Already Have An Account? <a href="/signin">Click Here!</a>
+                Already Have An Account? <a href="/login">Click Here!</a>
             </div>
         </div>
         <img src="{{ asset('images/wallpaper.jpg') }}" alt="Wallpaper" class="background-wallpaper">
