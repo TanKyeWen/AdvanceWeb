@@ -127,13 +127,13 @@
         <div class="add-body-container">
             <h1>Edit Task Page</h1>
         <!-- TODO: Need to make the Placeholder same as the editing Task -->
-            <<form action="{{ route('editTask') }}" method="post">
+            <form action="{{ route('editTask') }}" method="post">
                 @csrf
                 <input type="hidden" name="task-id" id="task-id" value="{{ $task->id }}">
                 
                 <div class="individual-field-container">
                     <input type="text" name="task-title-field" id="task-title-field"
-                        value="{{ $task->task_title }}"
+                        value="{{ $task->title }}"
                         placeholder="Enter New Task Title"
                         onfocus="removePlaceholder(this)"
                         onblur="restorePlaceholder(this, 'Enter New Task Title')">

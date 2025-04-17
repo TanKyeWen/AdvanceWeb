@@ -95,20 +95,35 @@
         <div class="login-body-container">
             <h1>Login Page</h1>
         <!-- TODO: Need to Create Session and validate if the credentials is correct -->
-            <form action="" method="post">
+            <form action="/login" method="post">
                 @csrf
                 <div class="individual-field-container">
-                    <img src="{{ asset('images/email.png') }}" class="email-icon" style="height: 25px; width: 35px; margin-right: 5px;">
-                    <input type="email" name="email-field" id="email-field" placeholder="Email" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Email')"> <br>
+                    <img src="{{ asset('images/user.png') }}" class="username-icon" style="height: 25px; width: 35px; margin-right: 5px;">
+                    <input type="text" name="username" id="username" placeholder="Username" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Username')"> <br>
                 </div>
+
+                @error('username')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
 
                 <div class="individual-field-container">
                     <img src="{{ asset('images/password.png') }}" class="password-icon" style="height: 30px; width: 30px; margin-right: 10px;">
-                    <input type="password" name="password-field" id="password-field" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
+                    <input type="password" name="password" id="password" placeholder="Password" onfocus="removePlaceholder(this)" onblur="restorePlaceholder(this, 'Password')">
                 </div>
+                @error('password')
+                    <div class="text-danger" style="color: red;">{{ $message }}</div>
+                @enderror
                 <input type="submit" value="Login" class="login-btn">
             </form>
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="redirect-register">
                 Do Not Have An Account? <a href="/signup">Click Here!</a>
             </div>

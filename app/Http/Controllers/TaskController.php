@@ -29,10 +29,10 @@ class TaskController extends Controller
 
         Task::create([
             'title' => $request->input('task-title-field'),
-            'date' => $request->input('task-date-field'),
-            'time' => $request->input('task-time-field'),
-            'location' => $request->input('task-location-field'),
-            'tag' => $request->input('task-tag-field'),
+            'task_date' => $request->input('task-date-field'),
+            'task_time' => $request->input('task-time-field'),
+            'task_location' => $request->input('task-location-field'),
+            'task_tag' => $request->input('task-tag-field'),
             'username' => $user->username, // foreign key reference
         ]);
 
@@ -60,7 +60,7 @@ class TaskController extends Controller
 
         $task = Task::findOrFail($request->input('task-id'));
 
-        $task->task_title = $request->input('task-title-field');
+        $task->title = $request->input('task-title-field');
         $task->task_date = $request->input('task-date-field');
         $task->task_time = $request->input('task-time-field');
         $task->task_location = $request->input('task-location-field');

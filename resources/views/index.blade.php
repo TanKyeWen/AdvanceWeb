@@ -317,10 +317,13 @@
             <div class="profile-button">
                 Profile
                 <div class="dropdown-content">
-                    <a href="/updateUsername">Update Username</a>
+                    <!-- <a href="/updateUsername">Update Username</a> -->
                     <a href="/updateEmail">Update Email</a>
                     <a href="/updatePassword">Update Password</a>
-                    <div class="logout-btn"><a>Logout</a></div>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -338,19 +341,29 @@
                     <div class="task-tag">{{ $task->task_tag }}</div>
 
                     <div class="task-buttons">
-                        <form action="/editTask/{{ $task->id }}" method="get" style="display: inline;">
+                        <form action="{{ route('task.edit', ['id' => $task->id]) }}" method="get" style="display: inline;">
                             <button type="submit" class="edit-btn">Edit</button>
                         </form>
-                        <form action="/deleteTask/{{ $task->id }}" method="post" style="display: inline;">
+                        <form action="{{ route('delete.task', ['id' => $task->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this task?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
             @endforeach
         </div>
+        <script>
+            document.getElementById('search-input').addEventListener('keyup', function () {
+                const query = this.value.toLowerCase();
+                const tasks = document.querySelectorAll('.individual-task-container');
 
+                tasks.forEach(task => {
+                    const title = task.querySelector('.task-title').textContent.toLowerCase();
+                    task.style.display = title.includes(query) ? '' : 'none';
+                });
+            });
+        </script>
         <div class="bottom-right-container">
             <div class="add-new-task" id="add-new-task-btn">
                 Add New Task

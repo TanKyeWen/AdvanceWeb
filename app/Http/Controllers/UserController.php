@@ -28,32 +28,54 @@ class UserController extends Controller
 
     // Automatically log in the user after sign up
     Auth::login($user);
-
+    
     // Redirect to index with username in URL
     return redirect()->route('index', ['username' => $user->username]);
 
   }
 
-  public function updateUsername(Request $request)
-  {
-      $request->validate([
-          'username' => 'required|unique:users,username',
-          'password' => 'required',
-      ]);
+  public function login(Request $request)
+    {
+        $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required'],
+        ]);
+    
+        $credentials = $request->only('username', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+    
+            $user = Auth::user();
+    
+            return redirect()->route('index', ['username' => $user->username]);
+        }
+    
+        return back()->withErrors([
+            'username' => 'The provided credentials do not match our records.',
+        ]);
+    }
 
-      $user = Auth::user();
+//   public function updateUsername(Request $request)
+//   {
+//       $request->validate([
+//           'username' => 'required|unique:users,username',
+//           'password' => 'required',
+//       ]);
 
-      if (!Hash::check($request->password, $user->password)) {
-          return back()->withErrors(['password' => 'Incorrect password.']);
-      }
+//       $user = Auth::user();
 
-      $user->username = $request->username;
-      $user->save();
+//       if (!Hash::check($request->password, $user->password)) {
+//           return back()->withErrors(['password' => 'Incorrect password.']);
+//       }
 
-      // Redirect to index with updated username
-      return redirect()->route('index', ['username' => $user->username])
-                      ->with('success', 'Username updated successfully!');
-  }
+//       $user->username = $request->username;
+//       $user->save();
+
+//       // Redirect to index with updated username
+//       return redirect()->route('index', ['username' => $user->username])
+//                       ->with('success', 'Username updated successfully!');
+//   }
 
   public function updateEmail(Request $request)
   {
@@ -81,7 +103,7 @@ class UserController extends Controller
       $request->validate([
           'password' => 'required',
           'password_new' => 'required|min:6',
-          're-password_new' => 'required|same:password_new',
+          're_password_new' => 'required|same:password_new',
       ]);
 
       $user = Auth::user();
@@ -90,12 +112,12 @@ class UserController extends Controller
           return back()->withErrors(['password' => 'Incorrect password.']);
       }
 
-      $user->password = $request->password_new;
+      $user->password = Hash::make($request->password_new);
       $user->save();
 
       // Redirect to index with updated password
       return redirect()->route('index', ['username' => $user->username])
-                      ->with('success', 'email updated successfully!');
+                      ->with('success', 'password updated successfully!');
   }
 
   public function showIndex($username)
