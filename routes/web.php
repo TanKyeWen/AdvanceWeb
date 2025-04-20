@@ -36,11 +36,21 @@ Route::middleware('auth')->group(function () {
         ->name('index')
         ->middleware('can:view-profile,username');
     
-    // Update user routes
-    Route::post('/updateEmail', [UserController::class, 'updateEmail'])->name('updateEmail');
-    Route::view('/updateEmail', 'updateEmail');
-    Route::post('/updatePassword', [UserController::class, 'updatePassword'])->name('updatePassword');
-    Route::view('/updatePassword', 'updatePassword');
+    // Update email
+    Route::post('/updateEmail', [UserController::class, 'updateEmail'])
+        ->name('updateEmail')
+        ->middleware('auth');
+
+    Route::view('/updateEmail', 'updateEmail')
+        ->middleware(['auth', 'can:update,App\Models\User']);
+
+    // Update password
+    Route::post('/updatePassword', [UserController::class, 'updatePassword'])
+        ->name('updatePassword')
+        ->middleware(['auth', 'can:update,App\Models\User']);
+
+    Route::view('/updatePassword', 'updatePassword')
+        ->middleware('auth');
     
     // Task routes with policy enforcement
     Route::get('/addTask', [TaskController::class, 'addNewTaskRedirect'])
